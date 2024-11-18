@@ -11,10 +11,16 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'api' => [
+            'class' => 'app\modules\api\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '3lNWGB8vHf84GAOWr54cpkAIEv0JrKZ-',
+            'enableCookieValidation' => false,
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -42,14 +48,20 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+    ],
+    'as cors' => [
+        'class' => \yii\filters\Cors::class,
+        'cors' => [
+            'Origin' => ['*'],  // Allow any origin to access your API
+            'Access-Control-Allow-Methods' => ['GET'],  // Allowed methods
+            'Access-Control-Allow-Headers' => ['*'],  // Allow all headers
+        ],
     ],
     'params' => $params,
 ];
